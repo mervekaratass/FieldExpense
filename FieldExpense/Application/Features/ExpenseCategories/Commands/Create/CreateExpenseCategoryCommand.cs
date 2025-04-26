@@ -34,8 +34,6 @@ namespace Application.Features.ExpenseCategories.Commands.Create
                     throw new BusinessException("Aynı isimde ikinci bir gider kategorisi eklenemez.");
 
                 ExpenseCategory expenseCategory = _mapper.Map<ExpenseCategory>(request);
-
-
                 await _expenseCategoryRepository.AddAsync(expenseCategory);
 
                 CreateExpenseCategoryResponse response = _mapper.Map<CreateExpenseCategoryResponse>(expenseCategory);

@@ -18,8 +18,13 @@ namespace Application.Features.ExpenseCategories.Profiles
         public ExpenseCategoryMappingProfiles()
         {
             CreateMap<ExpenseCategory, CreateExpenseCategoryCommand>().ReverseMap();
+            CreateMap<ExpenseCategory,CreateExpenseCategoryResponse>().ReverseMap();
+
             CreateMap<ExpenseCategory, DeleteExpenseCategoryResponse>().ReverseMap();
+
             CreateMap<ExpenseCategory, UpdateExpenseCategoryCommand>().ReverseMap();
+            CreateMap<ExpenseCategory, UpdateExpenseCategoryResponse>().ReverseMap();
+
             CreateMap<ExpenseCategory, GetListExpenseCategoryResponse>().ReverseMap();
             CreateMap<ExpenseCategory, GetByIdExpenseCategoryResponse>().ReverseMap();
 

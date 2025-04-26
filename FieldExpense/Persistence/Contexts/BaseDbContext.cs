@@ -39,12 +39,12 @@ namespace Persistence.Contexts
         private void ApplyEntityTimestamps()
         {
             var entries = ChangeTracker.Entries()
-                .Where(e => e.Entity is Entity<object> &&
+                .Where(e => e.Entity is Entity<int> &&
                        (e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted));
 
             foreach (var entry in entries)
             {
-                var entity = (Entity<object>)entry.Entity;
+                var entity = (Entity<int>)entry.Entity;
 
                 switch (entry.State)
                 {
