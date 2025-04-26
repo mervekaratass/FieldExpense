@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Persistence;
 using Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class ExpenseRequest : Entity
+    public class ExpenseRequest : Entity<int>
     {
         public int UserId { get; set; }
         public int ExpenseCategoryId { get; set; }
@@ -25,7 +25,7 @@ namespace Domain.Entities
         public virtual User User { get; set; }
         public virtual ExpenseCategory ExpenseCategory { get; set; }
         public virtual PaymentMethod PaymentMethod { get; set; }
-        public virtual BankTransaction? BankTransactions { get; set; }
+        public virtual BankTransaction? BankTransaction { get; set; }
     }
 
 }

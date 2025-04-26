@@ -2,14 +2,9 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Domain.Entities;
-using Core.Entities;
+using Core.Persistence;
 
 namespace Persistence.Contexts
 {
@@ -33,22 +28,44 @@ namespace Persistence.Contexts
 
         public override int SaveChanges()
         {
-            IEnumerable<EntityEntry<Entity>> entries = ChangeTracker
-                .Entries<Entity>()
-                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
-
-            foreach (EntityEntry<Entity> entry in entries)
-            {
-                _ = entry.State switch
-                {
-                    EntityState.Added => entry.Entity.CreatedDate = DateTime.UtcNow,
-                    EntityState.Modified => entry.Entity.UpdatedDate = DateTime.UtcNow,
-                    EntityState.Deleted => entry.Entity.DeletedDate = DateTime.UtcNow
-                };
-            }
+            ApplyEntityTimestamps();
             return base.SaveChanges();
         }
-     
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
+        {
+            ApplyEntityTimestamps();
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+        private void ApplyEntityTimestamps()
+        {
+            var entries = ChangeTracker.Entries()
+                .Where(e => e.Entity is Entity<object> &&
+                       (e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted));
+
+            foreach (var entry in entries)
+            {
+                var entity = (Entity<object>)entry.Entity;
+
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entity.CreatedDate = DateTime.UtcNow;
+                        break;
+
+                    case EntityState.Modified:
+                        entity.UpdatedDate = DateTime.UtcNow;
+                        break;
+
+                    case EntityState.Deleted:
+                        entity.DeletedDate = DateTime.UtcNow;
+                        entry.State = EntityState.Modified; // Soft delete
+                        break;
+                }
+            }
+        }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

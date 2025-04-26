@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Enums
 {
-    public enum RoleType
+    public enum  TransactionStatus
     {
-        Admin = 1,
-        Personnel = 2
-    }
 
+        Pending = 0,    // Bekliyor
+        Approved = 1,   // Onaylandı
+        Rejected = 2    // Reddedildi
+    }
 }

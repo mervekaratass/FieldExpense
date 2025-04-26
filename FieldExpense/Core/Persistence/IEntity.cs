@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Entities
+namespace Core.Persistence
 {
-    public interface IEntity
+    public interface IEntity<T>
     {
+        public T Id { get; set; }
     }
 }

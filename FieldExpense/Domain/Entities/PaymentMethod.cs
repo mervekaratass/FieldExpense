@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class PaymentMethod : Entity
+    public class PaymentMethod : Entity<int>
     {
 
         public string Name { get; set; }
