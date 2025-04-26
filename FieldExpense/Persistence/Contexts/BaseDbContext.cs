@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
@@ -13,7 +12,7 @@ namespace Persistence.Contexts
         protected IConfiguration Configuration { get; set; }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Domain.Entities.Role> Roles { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<ExpenseRequest> ExpenseRequests { get; set; }
         public DbSet<ExpenseCategory> ExpenseCategories { get; set; }

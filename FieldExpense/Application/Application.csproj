@@ -6,4 +6,37 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Auth\Commands\" />
+    <Folder Include="Features\Auth\Queries\" />
+    <Folder Include="Features\Auth\Profiles\" />
+    <Folder Include="Features\BankTransactions\Commands\" />
+    <Folder Include="Features\BankTransactions\Queries\" />
+    <Folder Include="Features\BankTransactions\Profiles\" />
+    <Folder Include="Features\ExpenseCategories\Commands\" />
+    <Folder Include="Features\ExpenseCategories\Queries\" />
+    <Folder Include="Features\ExpenseCategories\Profiles\" />
+    <Folder Include="Features\ExpenseRequests\Commands\" />
+    <Folder Include="Features\ExpenseRequests\Queries\" />
+    <Folder Include="Features\ExpenseRequests\Profiles\" />
+    <Folder Include="Features\PaymentMethods\Commands\" />
+    <Folder Include="Features\PaymentMethods\Queries\" />
+    <Folder Include="Features\PaymentMethods\Profiles\" />
+    <Folder Include="Features\Roles\Commands\" />
+    <Folder Include="Features\Roles\Profiles\" />
+    <Folder Include="Features\Roles\Queries\" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+		<PackageReference Include="FluentValidation" Version="11.9.0" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+		<PackageReference Include="MediatR" Version="12.2.0" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Persistence\Persistence.csproj" />
+  </ItemGroup>
+
 </Project>
