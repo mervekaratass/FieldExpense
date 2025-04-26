@@ -13,9 +13,6 @@
     <Folder Include="Features\BankTransactions\Commands\" />
     <Folder Include="Features\BankTransactions\Queries\" />
     <Folder Include="Features\BankTransactions\Profiles\" />
-    <Folder Include="Features\ExpenseCategories\Commands\" />
-    <Folder Include="Features\ExpenseCategories\Queries\" />
-    <Folder Include="Features\ExpenseCategories\Profiles\" />
     <Folder Include="Features\ExpenseRequests\Commands\" />
     <Folder Include="Features\ExpenseRequests\Queries\" />
     <Folder Include="Features\ExpenseRequests\Profiles\" />

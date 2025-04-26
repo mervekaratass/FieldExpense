@@ -4,7 +4,9 @@ using Application.Services.ExpenseCategoryService;
 using Application.Services.ExpenseRequetService;
 using Application.Services.PaymentMethodService;
 using Application.Services.RoleService;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 
 namespace Application
@@ -20,7 +22,10 @@ namespace Application
             services.AddScoped<IExpenseRequestService, ExpenseRequestManager>();
             services.AddScoped<IPaymentMethodService, PaymentMethodManager>();
             services.AddScoped<IRoleService, RoleManager>();
-         
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
             return services;
         }
     }
