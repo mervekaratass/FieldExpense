@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Application.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Contexts;
+using Persistence.Repositories;
 
 
 namespace Persistence
@@ -13,7 +15,12 @@ namespace Persistence
             services.AddDbContext<BaseDbContext>(
                 options => options.UseSqlServer(configuration.GetConnectionString("MsSqlConnectionString"))
             );
-
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+            services.AddScoped<IExpenseCategoryRepository, ExpenseCategoryRepository>();
+            services.AddScoped<IExpenseRequestRepository, ExpenseRequestRepository>();
+            services.AddScoped<IBankTransactionRepository, BankTransactionRepository>();
             return services;
         }
     }

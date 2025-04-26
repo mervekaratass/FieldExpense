@@ -2,7 +2,7 @@
 
 namespace Application.Services.ExpenseRequetService
 {
-    public interface IExpenseRequetService
+    public class ExpenseRequestManager:IExpenseRequestService
     {
     }
 }
