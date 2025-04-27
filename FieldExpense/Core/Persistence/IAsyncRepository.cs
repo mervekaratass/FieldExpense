@@ -12,15 +12,18 @@ namespace Core.Persistence
             Func<IQueryable<T>,IOrderedQueryable<T>>? orderBy = null,
             int? pageIndex = null,
             int? pageSize = null,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default,
+             bool includeDeleted = false);
         Task<List<T>> GetListAsync(Expression<Func<T, bool>>? predicate = null, Func<IQueryable<T>,
             IIncludableQueryable<T, object>>? include = null,
             Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
             int? pageIndex = null,
             int? pageSize = null,
-                CancellationToken cancellationToken = default);
+                CancellationToken cancellationToken = default,
+                 bool includeDeleted = false);
         Task AddAsync(T entity, CancellationToken cancellationToken = default);
         Task UpdateAsync(T entity, CancellationToken cancellationToken = default);
         Task DeleteAsync(T entity, CancellationToken cancellationToken = default);
+        Task RestoreAsync(T entity, CancellationToken cancellationToken = default);
     }
 }

@@ -16,9 +16,6 @@
     <Folder Include="Features\ExpenseRequests\Commands\" />
     <Folder Include="Features\ExpenseRequests\Queries\" />
     <Folder Include="Features\ExpenseRequests\Profiles\" />
-    <Folder Include="Features\PaymentMethods\Commands\" />
-    <Folder Include="Features\PaymentMethods\Queries\" />
-    <Folder Include="Features\PaymentMethods\Profiles\" />
     <Folder Include="Features\Roles\Commands\" />
     <Folder Include="Features\Roles\Profiles\" />
     <Folder Include="Features\Roles\Queries\" />

@@ -1,6 +1,4 @@
-﻿
-
-namespace Application.Features.ExpenseCategories.Queries.GetById
+﻿namespace Application.Features.ExpenseCategories.Queries.GetById
 {
     public class GetByIdExpenseCategoryResponse
     {
