@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] GetListExpenseCategoryQuery query)
+        public async Task<IActionResult> GetList([FromQuery] GetListExpenseCategoryQuery query)
         {
             var result = await _mediator.Send(query);
             return Ok(result);

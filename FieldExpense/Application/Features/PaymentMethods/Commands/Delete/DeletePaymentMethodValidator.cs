@@ -1,10 +1,5 @@
-﻿using Application.Features.ExpenseCategories.Commands.Delete;
-using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
+
 
 namespace Application.Features.PaymentMethods.Commands.Delete
 {

@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreatePaymentMethodCommand command)
+        public async Task<IActionResult> Add([FromBody] CreatePaymentMethodCommand command)
         {
             var result = await _mediator.Send(command);
             return Created("", result);

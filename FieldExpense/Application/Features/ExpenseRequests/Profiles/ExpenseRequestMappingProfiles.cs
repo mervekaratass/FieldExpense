@@ -20,6 +20,7 @@ namespace Application.Features.ExpenseRequests.Profiles
           
             CreateMap<ExpenseRequest, CreateExpenseRequestResponse>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString())).ReverseMap();
+            CreateMap<ExpenseRequest, CreateExpenseRequestCommand>().ReverseMap();
 
 
 

@@ -10,12 +10,6 @@
     <Folder Include="Features\Auth\Commands\" />
     <Folder Include="Features\Auth\Queries\" />
     <Folder Include="Features\Auth\Profiles\" />
-    <Folder Include="Features\BankTransactions\Commands\" />
-    <Folder Include="Features\BankTransactions\Queries\" />
-    <Folder Include="Features\BankTransactions\Profiles\" />
-    <Folder Include="Features\Roles\Commands\" />
-    <Folder Include="Features\Roles\Profiles\" />
-    <Folder Include="Features\Roles\Queries\" />
   </ItemGroup>
 
 	<ItemGroup>

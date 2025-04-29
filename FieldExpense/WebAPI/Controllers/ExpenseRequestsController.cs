@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
             }
 
             [HttpPost]
-            public async Task<IActionResult> Create([FromBody] CreateExpenseRequestCommand command)
+            public async Task<IActionResult> Add([FromBody] CreateExpenseRequestCommand command)
             {
                 var result = await _mediator.Send(command);
                 return Created("", result);
