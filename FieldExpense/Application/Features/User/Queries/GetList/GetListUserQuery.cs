@@ -2,6 +2,7 @@
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.User.Queries.GetList
 {
@@ -20,7 +21,7 @@ namespace Application.Features.User.Queries.GetList
 
             public async Task<List<GetListUserResponse>> Handle(GetListUserQuery request, CancellationToken cancellationToken)
             {
-                List<Domain.Entities.User> users = await _userRepository.GetListAsync();
+                List<Domain.Entities.User> users = await _userRepository.GetListAsync(include:u=>u.Include(x=>x.Role));
 
                 var response = _mapper.Map<List<GetListUserResponse>>(users);
 

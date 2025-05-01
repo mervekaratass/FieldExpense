@@ -14,7 +14,7 @@ namespace Persistence.EntityConfigurations
             builder.Property(u => u.LastName).IsRequired().HasMaxLength(100);
             builder.Property(u => u.Phone).IsRequired().HasMaxLength(100);
             builder.Property(u => u.Email).IsRequired().HasMaxLength(100);
-            builder.HasIndex(u => u.Email).IsUnique();
+            //builder.HasIndex(u => u.Email).IsUnique();
             builder.Property(u => u.IBAN).IsRequired().HasMaxLength(34);
             builder.HasQueryFilter(u => !u.DeletedDate.HasValue);
 

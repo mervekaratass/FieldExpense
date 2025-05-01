@@ -1,4 +1,7 @@
-﻿using Application.Repositories;
+﻿using Application.Features.ExpenseRequests.Commands.Delete;
+using Application.Repositories;
+using Application.Services.BankTransactionService;
+using AutoMapper;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
@@ -13,23 +16,27 @@ namespace Application.Features.BankTransactions.Commands.Delete
         public class DeleteBankTransactionCommandHandler : IRequestHandler<DeleteBankTransactionCommand, DeleteBankTransactionResponse>
         {
             private readonly IBankTransactionRepository _bankTransactionRepository;
+            private readonly IMapper _mapper;
 
-            public DeleteBankTransactionCommandHandler(IBankTransactionRepository bankTransactionRepository)
+            public DeleteBankTransactionCommandHandler(IBankTransactionRepository bankTransactionRepository, IMapper mapper)
             {
                 _bankTransactionRepository = bankTransactionRepository;
+                _mapper = mapper;
             }
 
             public async Task<DeleteBankTransactionResponse> Handle(DeleteBankTransactionCommand request, CancellationToken cancellationToken)
             {
-                BankTransaction? entity = await _bankTransactionRepository.GetAsync(predicate: bt => bt.Id == request.Id ,include:bt=>bt.Include(x=>x.ExpenseRequest).ThenInclude(x=>x.User));
-                if (entity is null)
+                BankTransaction? bankTransaction = await _bankTransactionRepository.GetAsync(predicate: bt => bt.Id == request.Id ,include:bt=>bt.Include(x=>x.ExpenseRequest).ThenInclude(x=>x.User));
+                if (bankTransaction is null)
                     throw new BusinessException("Silinmek istenen banka işlemi bulunamadı.");
 
-                entity.DeletedDate = DateTime.UtcNow;
+           
 
-                await _bankTransactionRepository.UpdateAsync(entity, cancellationToken);
+                await _bankTransactionRepository.DeleteAsync(bankTransaction);
 
-                return new DeleteBankTransactionResponse { Id = entity.Id };
+                DeleteBankTransactionResponse response = _mapper.Map<DeleteBankTransactionResponse>(bankTransaction);
+
+                return response;
             }
         }
     }

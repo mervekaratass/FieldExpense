@@ -27,7 +27,7 @@ namespace Application.Features.User.Commands.Create
                 .Length(26, 34).WithMessage("IBAN 26 ile 34 karakter arasında olmalıdır.");
 
             RuleFor(x => x.RoleId)
-                .GreaterThan(0).WithMessage("Geçerli bir rol seçilmelidir.");
+                .GreaterThan(0).WithMessage("Geçerli bir rol seçilmelidir.").NotEmpty().WithMessage("Rol ıd 'si boş olamaz");
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("Şifre boş olamaz.")
                 .MinimumLength(9).WithMessage("Şifre en az 9 karakter olmalıdır.")

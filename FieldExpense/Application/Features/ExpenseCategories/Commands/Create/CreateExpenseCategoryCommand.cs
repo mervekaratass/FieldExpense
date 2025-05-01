@@ -26,7 +26,7 @@ namespace Application.Features.ExpenseCategories.Commands.Create
 
                 ExpenseCategory? categoryWithSameName = await _expenseCategoryRepository.GetAsync(ec => ec.Name == request.Name);
                 if (categoryWithSameName is not null)
-                    throw new BusinessException("Aynı isimde ikinci bir gider kategorisi eklenemez.");
+                    throw new BusinessException("Aynı isimde ikinci bir masraf kategorisi eklenemez.");
 
                 ExpenseCategory expenseCategory = _mapper.Map<ExpenseCategory>(request);
                 await _expenseCategoryRepository.AddAsync(expenseCategory);

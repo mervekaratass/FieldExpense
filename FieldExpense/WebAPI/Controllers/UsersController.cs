@@ -1,15 +1,10 @@
 ﻿
-using Application.Features.Roles.Commands.Create;
-using Application.Features.Roles.Commands.Delete;
-using Application.Features.Roles.Commands.Update;
-using Application.Features.Roles.Queries.GetById;
-using Application.Features.Roles.Queries.GetList;
 using Application.Features.User.Commands.Create;
 using Application.Features.User.Commands.Delete;
 using Application.Features.User.Commands.Update;
+using Application.Features.User.Queries.GetById;
 using Application.Features.User.Queries.GetList;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -35,7 +30,7 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var query = new GetByIdRoleQuery { Id = id };
+            var query = new GetByIdUserQuery { Id = id };
             var result = await _mediator.Send(query);
             return Ok(result);
         }

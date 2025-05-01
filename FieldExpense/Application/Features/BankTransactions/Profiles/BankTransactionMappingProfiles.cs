@@ -14,23 +14,28 @@ namespace Application.Features.BankTransactions.Profiles
         {
 
             CreateMap<CreateBankTransactionCommand, BankTransaction>();
+                
             CreateMap<BankTransaction, CreateBankTransactionResponse>()
                 .ForMember(dest => dest.TransactionStatus, opt => opt.MapFrom(src => src.TransactionStatus.ToString()));
 
             CreateMap<BankTransaction, DeleteBankTransactionResponse>()
-           .ForMember(dest => dest.UserFullName,
-                      opt => opt.MapFrom(src => src.ExpenseRequest.User.FirstName + " " + src.ExpenseRequest.User.LastName));
-           
+          .ForMember(dest => dest.TransactionStatus, opt => opt.MapFrom(src => src.TransactionStatus.ToString()))
+                 .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.ExpenseRequest.User.FirstName + " " + src.ExpenseRequest.User.LastName));
+
 
             //           .ForMember(dest => dest.ExpenseRequestDescription, opt => opt.MapFrom(src => src.ExpenseRequest.Description))
 
-              CreateMap<BankTransaction, UpdateBankTransactionResponse>()
-             .ForMember(dest => dest.TransactionStatus, opt => opt.MapFrom(src => src.TransactionStatus.ToString())).ReverseMap();
-              CreateMap<UpdateBankTransactionCommand, BankTransaction>().ReverseMap();
+            CreateMap<BankTransaction, UpdateBankTransactionResponse>()
+                  .ForMember(dest => dest.TransactionStatus, opt => opt.MapFrom(src => src.TransactionStatus.ToString())).ReverseMap();
+              CreateMap<UpdateBankTransactionCommand, BankTransaction>()
+                .ForMember(dest => dest.TransactionStatus, opt => opt.MapFrom(src => src.TransactionStatus.ToString())).ReverseMap();
 
-            CreateMap<BankTransaction, GetByIdBankTransactionResponse>().ForMember(dest => dest.UserFullName,
-                      opt => opt.MapFrom(src => src.ExpenseRequest.User.FirstName + " " + src.ExpenseRequest.User.LastName)).ReverseMap();
-            CreateMap<BankTransaction, GetListBankTransactionResponse>().ReverseMap().ReverseMap();
+            CreateMap<BankTransaction, GetByIdBankTransactionResponse>()
+                 .ForMember(dest => dest.TransactionStatus, opt => opt.MapFrom(src => src.TransactionStatus.ToString()))
+                 .ForMember(dest => dest.UserFullName, opt => opt.MapFrom(src => src.ExpenseRequest.User.FirstName + " " + src.ExpenseRequest.User.LastName));
+            CreateMap<BankTransaction, GetListBankTransactionResponse>()
+                         .ForMember(dest => dest.TransactionStatus, opt => opt.MapFrom(src => src.TransactionStatus.ToString()))
+                        .ForMember(dest => dest.UserFullName,opt => opt.MapFrom(src => src.ExpenseRequest.User.FirstName + " " + src.ExpenseRequest.User.LastName));
 
 
 

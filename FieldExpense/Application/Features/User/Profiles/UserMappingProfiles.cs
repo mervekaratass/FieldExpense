@@ -14,8 +14,7 @@ namespace Application.Features.User.Profiles
             CreateMap<Domain.Entities.User, CreateUserResponse>().ReverseMap();
 
            
-            CreateMap<Domain.Entities.User, UpdateUserResponse>()
-                .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}")).ReverseMap();
+            CreateMap<Domain.Entities.User, UpdateUserResponse>().ReverseMap();
             CreateMap<UpdateUserCommand, Domain.Entities.User>()
                 .ForMember(dest => dest.PasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.PasswordSalt, opt => opt.Ignore()).ReverseMap();

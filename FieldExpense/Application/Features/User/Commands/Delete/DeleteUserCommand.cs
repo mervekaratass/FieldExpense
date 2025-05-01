@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,7 +25,7 @@ namespace Application.Features.User.Commands.Delete
             {
                 Domain.Entities.User? user = await _userRepository.GetAsync(u => u.Id == request.Id, include:u=>u.Include(x=>x.Role));
                 if (user == null)
-                    throw new Exception("Kullanıcı bulunamadı.");
+                    throw new BusinessException("Kullanıcı bulunamadı.");
 
                 await _userRepository.DeleteAsync(user);
                 return _mapper.Map<DeleteUserResponse>(user);

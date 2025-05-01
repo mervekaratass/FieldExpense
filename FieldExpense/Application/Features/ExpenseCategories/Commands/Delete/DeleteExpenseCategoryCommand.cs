@@ -30,7 +30,7 @@ namespace Application.Features.ExpenseCategories.Commands.Delete
             {
                 ExpenseCategory? expenseCategory = await _expenseCategoryRepository.GetAsync(ec => ec.Id == request.Id);
                 if (expenseCategory is null)
-                    throw new BusinessException("Silinmek istenen gider kategorisi bulunamadı.");
+                    throw new BusinessException("Silinmek istenen masraf kategorisi bulunamadı.");
 
                 await _expenseCategoryRepository.DeleteAsync(expenseCategory);
 

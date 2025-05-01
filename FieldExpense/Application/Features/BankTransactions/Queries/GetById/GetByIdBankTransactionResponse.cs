@@ -10,7 +10,7 @@ namespace Application.Features.BankTransactions.Queries.GetById
         public int ExpenseRequestId { get; set; }
         public decimal Amount { get; set; }
         public DateTime TransactionDate { get; set; }
-        public TransactionStatus TransactionStatus { get; set; }
+        public string TransactionStatus { get; set; }
         public string BankReferenceCode { get; set; }
     }
 

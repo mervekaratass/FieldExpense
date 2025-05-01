@@ -26,7 +26,7 @@ namespace Application.Features.ExpenseCategories.Queries.GetById
             {
                 ExpenseCategory? expenseCategory = await _expenseCategoryRepository.GetAsync(ec => ec.Id == request.Id);
                 if (expenseCategory is null)
-                    throw new BusinessException("Masraf kategorisi bulunamadı.");
+                    throw new BusinessException("Böyle bir masraf kategorisi bulunamadı.");
 
                 GetByIdExpenseCategoryResponse response = _mapper.Map<GetByIdExpenseCategoryResponse>(expenseCategory);
                 return response;

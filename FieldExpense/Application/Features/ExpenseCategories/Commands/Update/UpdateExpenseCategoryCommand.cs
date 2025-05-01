@@ -27,7 +27,7 @@ namespace Application.Features.ExpenseCategories.Commands.Update
             {
                 ExpenseCategory? expenseCategory = await _expenseCategoryRepository.GetAsync(ec => ec.Id == request.Id);
                 if (expenseCategory is null)
-                    throw new BusinessException("Güncellenmek istenen gider kategorisi bulunamadı.");
+                    throw new BusinessException("Güncellenmek istenen masraf kategorisi bulunamadı.");
 
 
                 ExpenseCategory? withSameNameCategory = await _expenseCategoryRepository.GetAsync(ec => ec.Name == request.Name && ec.Id != request.Id);

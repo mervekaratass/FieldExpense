@@ -1,9 +1,12 @@
 ﻿using Application.Repositories;
 using Application.Services.RoleService;
+using Application.Services.User;
 using AutoMapper;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Utilities.Hashing;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.User.Commands.Update
 {
@@ -22,20 +25,29 @@ namespace Application.Features.User.Commands.Update
         {
             private readonly IUserRepository _userRepository;
             private readonly IMapper _mapper;
-            
+            private readonly IRoleService _roleService;
+            private readonly IUserService _userService;
 
-            public UpdateUserCommandHandler(IUserRepository userRepository, IMapper mapper)
+            public UpdateUserCommandHandler(IUserRepository userRepository, IMapper mapper, IRoleService roleService, IUserService userService)
             {
                 _userRepository = userRepository;
                 _mapper = mapper;
-                
+                _roleService = roleService;
+                _userService = userService;
             }
 
             public async Task<UpdateUserResponse> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
             {
-                var user = await _userRepository.GetAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+                await _userService.EmailExistsForOtherUserAsync(request.Id,request.Email);
+                await _userService.PhoneExistsForOtherUserAsync(request.Id, request.Phone);
+                await _userService.IbanExistsForOtherUserAsync(request.Id, request.IBAN);
+
+
+                var user = await _userRepository.GetAsync(x => x.Id == request.Id, include:u=>u.Include(x=>x.Role));
                 if (user == null)
-                    throw new Exception("Kullanıcı bulunamadı.");
+                    throw new BusinessException("Kullanıcı bulunamadı.");
+
+                Role? role = await _roleService.GetByIdAsync(request.RoleId);
 
                 _mapper.Map(request, user);
 

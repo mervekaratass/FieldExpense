@@ -26,10 +26,9 @@ namespace Application.Features.User.Queries.GetById
         {
             var user = await _userRepository.GetAsync(u => u.Id == request.Id,include:u=>u.Include(x=>x.Role));
 
-            if (user == null)
-            {
+            if (user is null)
                 throw new BusinessException("Kullanıcı bulunamadı.");
-            }
+            
 
             var response = _mapper.Map<GetByIdUserResponse>(user);
             return response;

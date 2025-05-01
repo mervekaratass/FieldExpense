@@ -3,6 +3,9 @@ using AutoMapper;
 using Core.Utilities.Hashing;
 using MediatR;
 using Domain.Entities;
+using Core.CrossCuttingConcerns.Exceptions.Types;
+using Application.Services.RoleService;
+using Application.Services.User;
 
 namespace Application.Features.User.Commands.Create
 {
@@ -20,21 +23,27 @@ namespace Application.Features.User.Commands.Create
         public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, CreateUserResponse>
         {
             private readonly IUserRepository _userRepository;
-            private readonly IRoleRepository _roleRepository;
+            private readonly IRoleService _roleService;
             private readonly IMapper _mapper;
+            private readonly IUserService _userService;
 
-            public CreateUserCommandHandler(IUserRepository userRepository, IRoleRepository roleRepository, IMapper mapper)
+            public CreateUserCommandHandler(IUserRepository userRepository, IRoleService roleService, IMapper mapper, IUserService userService)
             {
                 _userRepository = userRepository;
-                _roleRepository = roleRepository;
+                _roleService = roleService;
                 _mapper = mapper;
+                _userService = userService;
             }
 
             public async Task<CreateUserResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
             {
-                Role? role = await _roleRepository.GetAsync(r => r.Id == request.RoleId, cancellationToken: cancellationToken);
-                if (role == null)
-                    throw new Exception("Rol bulunamadı.");
+                await _userService.EmailExistsAsync(request.Email);
+                await _userService.PhoneExistsAsync(request.Phone);
+                await _userService.IbanExistsAsync(request.IBAN);
+
+                Role? role = await _roleService.GetByIdAsync(request.RoleId);
+
+
 
                 byte[] passwordHash, passwordSalt;
                 HashingHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
