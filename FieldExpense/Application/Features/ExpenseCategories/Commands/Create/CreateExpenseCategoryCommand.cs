@@ -1,13 +1,15 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.ExpenseCategories.Commands.Create
 {
-    public class CreateExpenseCategoryCommand : IRequest<CreateExpenseCategoryResponse>
+    public class CreateExpenseCategoryCommand : IRequest<CreateExpenseCategoryResponse>,ISecuredRequest
     {
+        public string[] RequiredRoles => ["Admin"];
         public string Name { get; set; }
 
         public class CreateExpenseCategoryCommandHandler : IRequestHandler<CreateExpenseCategoryCommand, CreateExpenseCategoryResponse>

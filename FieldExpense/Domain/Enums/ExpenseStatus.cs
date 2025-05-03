@@ -4,9 +4,9 @@ namespace Domain.Enums
 {
     public enum ExpenseStatus
     {
-        Pending = 0,    // Bekliyor
-        Approved = 1,   // Onaylandı
-        Rejected = 2    // Reddedildi
+        Bekliyor = 0,    // Pending
+        Onaylandı = 1,   // Approved
+        Reddedildi  = 2   // Rejected
     }
 
 }

@@ -1,15 +1,16 @@
 ﻿using Application.Features.ExpenseRequests.Commands.Create;
+using  Application.Features.ExpenseRequests.Commands.CreateForSelf;
+using Application.Features.ExpenseRequests.Commands.Decision.Approve.Application.Features.ExpenseRequests.Commands.Approve;
+using Application.Features.ExpenseRequests.Commands.Decision.Reject.Application.Features.ExpenseRequests.Commands.Reject;
 using Application.Features.ExpenseRequests.Commands.Delete;
+using Application.Features.ExpenseRequests.Commands.MarkAsPaid;
 using Application.Features.ExpenseRequests.Commands.Update;
 using Application.Features.ExpenseRequests.Queries.GetById;
+using Application.Features.ExpenseRequests.Queries.GetFiltered;
 using Application.Features.ExpenseRequests.Queries.GetList;
+using Application.Features.ExpenseRequests.Queries.GetMyList;
 using AutoMapper;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.ExpenseRequests.Profiles
 {
@@ -24,7 +25,6 @@ namespace Application.Features.ExpenseRequests.Profiles
 
 
 
-
             CreateMap<ExpenseRequest, DeleteExpenseRequestResponse>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName))
                 .ForMember(dest => dest.ExpenseCategoryName, opt => opt.MapFrom(src => src.ExpenseCategory.Name))
@@ -34,24 +34,62 @@ namespace Application.Features.ExpenseRequests.Profiles
 
 
             CreateMap<ExpenseRequest, UpdateExpenseRequestResponse>()
-           .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
-
-            CreateMap<UpdateExpenseRequestCommand, ExpenseRequest>();
+           .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString())).ReverseMap();
+            CreateMap<UpdateExpenseRequestCommand, ExpenseRequest>().ReverseMap();
 
             CreateMap<ExpenseRequest, GetByIdExpenseRequestResponse>()
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName))
             .ForMember(dest => dest.ExpenseCategoryName, opt => opt.MapFrom(src => src.ExpenseCategory.Name))
             .ForMember(dest => dest.PaymentMethodName, opt => opt.MapFrom(src => src.PaymentMethod.Name))
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString())).ReverseMap();
 
 
             CreateMap<ExpenseRequest, GetListExpenseRequestResponse>()
-    .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName))
-    .ForMember(dest => dest.ExpenseCategoryName, opt => opt.MapFrom(src => src.ExpenseCategory.Name))
-    .ForMember(dest => dest.PaymentMethodName, opt => opt.MapFrom(src => src.PaymentMethod.Name))
-    .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName))
+                .ForMember(dest => dest.ExpenseCategoryName, opt => opt.MapFrom(src => src.ExpenseCategory.Name))
+                .ForMember(dest => dest.PaymentMethodName, opt => opt.MapFrom(src => src.PaymentMethod.Name))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString())).ReverseMap();
+
+            //Approve
+            CreateMap<ExpenseRequest, ApproveExpenseRequestResponse>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName))
+                .ForMember(dest => dest.ExpenseCategoryName, opt => opt.MapFrom(src => src.ExpenseCategory.Name))
+                .ForMember(dest => dest.PaymentMethodName, opt => opt.MapFrom(src => src.PaymentMethod.Name)).ReverseMap();
+
+            //Reject
+            CreateMap<ExpenseRequest, RejectExpenseRequestResponse>()
+               .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+               .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName))
+               .ForMember(dest => dest.ExpenseCategoryName, opt => opt.MapFrom(src => src.ExpenseCategory.Name))
+               .ForMember(dest => dest.PaymentMethodName, opt => opt.MapFrom(src => src.PaymentMethod.Name)).ReverseMap();
 
 
+            //GetMyList
+            CreateMap<ExpenseRequest, GetMyListExpenseRequestResponse>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName))
+                .ForMember(dest => dest.ExpenseCategoryName, opt => opt.MapFrom(src => src.ExpenseCategory.Name))
+                .ForMember(dest => dest.PaymentMethodName, opt => opt.MapFrom(src => src.PaymentMethod.Name))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString())).ReverseMap();
+
+
+            //MarkAsPaid
+            CreateMap<BankTransaction, MarkAsPaidResponse>()
+           .ForMember(dest => dest.TransactionStatus, opt => opt.MapFrom(src => src.TransactionStatus.ToString())).ReverseMap();
+
+            //CreateMyExpenseRequest
+            CreateMap<ExpenseRequest, CreateMyExpenseRequestResponse>()
+              .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+                    .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName)).ReverseMap();
+            CreateMap<ExpenseRequest, CreateMyExpenseRequestCommand>().ReverseMap();
+
+
+
+            CreateMap<ExpenseRequest, GetFilteredExpenseRequestResponse>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName))
+                .ForMember(dest => dest.ExpenseCategoryName, opt => opt.MapFrom(src => src.ExpenseCategory.Name))
+                .ForMember(dest => dest.PaymentMethodName, opt => opt.MapFrom(src => src.PaymentMethod.Name))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
 
         }
     }

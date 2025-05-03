@@ -30,7 +30,13 @@ namespace Application.Features.BankTransactions.Commands.Delete
                 if (bankTransaction is null)
                     throw new BusinessException("Silinmek istenen banka işlemi bulunamadı.");
 
-           
+
+                bool hasExpenseRequest =
+              bankTransaction.ExpenseRequest != null &&
+              bankTransaction.ExpenseRequest.DeletedDate == null;
+
+                if (hasExpenseRequest)
+                    throw new BusinessException("Bu banka işlemine ait kayıtlı bir masraf talebi bulunduğundan dolayı silinemez. Lütfen önce ilgili masraf talebi işlemini kaldırın veya iptal edin.");
 
                 await _bankTransactionRepository.DeleteAsync(bankTransaction);
 

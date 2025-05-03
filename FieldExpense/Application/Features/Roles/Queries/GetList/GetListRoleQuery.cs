@@ -1,13 +1,14 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Roles.Queries.GetList
 {
-    public class GetListRoleQuery : IRequest<List<GetListRoleResponse>>
+    public class GetListRoleQuery : IRequest<List<GetListRoleResponse>>,ISecuredRequest
     {
-
+        public string[] RequiredRoles => ["Admin"];
         public class GetListRoleQueryHandler : IRequestHandler<GetListRoleQuery, List<GetListRoleResponse>>
         {
             private readonly IRoleRepository _roleRepository;

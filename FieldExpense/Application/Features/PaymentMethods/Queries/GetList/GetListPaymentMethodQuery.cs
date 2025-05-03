@@ -2,13 +2,15 @@
 using Application.Features.ExpenseCategories.Queries.GetList;
 using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.PaymentMethods.Queries.GetList
 {
-    public class GetListPaymentMethodQuery : IRequest<List<GetListPaymentMethodResponse>>
+    public class GetListPaymentMethodQuery : IRequest<List<GetListPaymentMethodResponse>>,ISecuredRequest
     {
+        public string[] RequiredRoles => ["Admin"];
         public class GetListPaymentMethodQueryHandler : IRequestHandler<GetListPaymentMethodQuery, List<GetListPaymentMethodResponse>>
         {
             private readonly IPaymentMethodRepository _paymentMethodRepository;

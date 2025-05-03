@@ -2,13 +2,15 @@
 
 using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.ExpenseCategories.Queries.GetList
 {
-    public class GetListExpenseCategoryQuery : IRequest<List<GetListExpenseCategoryResponse>>
+    public class GetListExpenseCategoryQuery : IRequest<List<GetListExpenseCategoryResponse>>,ISecuredRequest
     {
+        public string[] RequiredRoles => ["Admin"];
         public class GetListExpenseCategoryQueryHandler : IRequestHandler<GetListExpenseCategoryQuery, List<GetListExpenseCategoryResponse>>
         {
             private readonly IExpenseCategoryRepository _expenseCategoryRepository;

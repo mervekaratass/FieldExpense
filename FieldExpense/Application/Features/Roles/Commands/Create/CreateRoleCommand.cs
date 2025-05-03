@@ -1,15 +1,17 @@
 ﻿using Application.Features.PaymentMethods.Commands.Create;
 using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Roles.Commands.Create
 {
-    public class CreateRoleCommand : IRequest<CreateRoleResponse>
+    public class CreateRoleCommand : IRequest<CreateRoleResponse>,ISecuredRequest
     {
         public string Name { get; set; }
+        public string[] RequiredRoles => ["Admin"];
 
         public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, CreateRoleResponse>
         {

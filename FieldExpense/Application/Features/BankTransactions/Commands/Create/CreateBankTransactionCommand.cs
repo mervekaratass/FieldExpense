@@ -11,7 +11,6 @@ namespace Application.Features.BankTransactions.Commands.Create
     {
         public int ExpenseRequestId { get; set; }
         public decimal Amount { get; set; }
-        public string BankReferenceCode { get; set; }
 
 
         public class CreateBankTransactionCommandHandler : IRequestHandler<CreateBankTransactionCommand, CreateBankTransactionResponse>
@@ -37,8 +36,9 @@ namespace Application.Features.BankTransactions.Commands.Create
                     throw new BusinessException("İlgili masraf isteği bulunamadı.");
 
                 var entity = _mapper.Map<BankTransaction>(request);
-                entity.TransactionStatus = TransactionStatus.Pending;
+                entity.TransactionStatus = TransactionStatus.Başarılı;
                 entity.TransactionDate = DateTime.UtcNow;
+                entity.BankReferenceCode = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
 
                 await _bankTransactionRepository.AddAsync(entity);
 

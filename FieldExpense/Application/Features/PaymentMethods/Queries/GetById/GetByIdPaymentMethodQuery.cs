@@ -2,15 +2,17 @@
 using Application.Features.ExpenseCategories.Queries.GetById;
 using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.PaymentMethods.Queries.GetById
 {
-    public class GetByIdPaymentMethodQuery : IRequest<GetByIdPaymentMethodResponse>
+    public class GetByIdPaymentMethodQuery : IRequest<GetByIdPaymentMethodResponse>,ISecuredRequest
     {
         public int Id { get; set; }
+        public string[] RequiredRoles => ["Admin"];
 
         public class GetByIdPaymentMethodQueryHandler : IRequestHandler<GetByIdPaymentMethodQuery, GetByIdPaymentMethodResponse>
         {

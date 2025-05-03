@@ -1,16 +1,17 @@
 ﻿
 using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.ExpenseCategories.Queries.GetById
 {
-    public class GetByIdExpenseCategoryQuery : IRequest<GetByIdExpenseCategoryResponse>
+    public class GetByIdExpenseCategoryQuery : IRequest<GetByIdExpenseCategoryResponse>,ISecuredRequest
     {
         public int Id { get; set; }
-
+        public string[] RequiredRoles => ["Admin"];
         public class GetByIdExpenseCategoryQueryHandler : IRequestHandler<GetByIdExpenseCategoryQuery, GetByIdExpenseCategoryResponse>
         {
             private readonly IExpenseCategoryRepository _expenseCategoryRepository;

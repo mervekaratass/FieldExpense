@@ -1,6 +1,7 @@
 ﻿using Application.Features.ExpenseCategories.Commands.Update;
 using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
@@ -12,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.PaymentMethods.Commands.Update
 {
-    public class UpdatePaymentMethodCommand : IRequest<UpdatePaymentMethodResponse>
+    public class UpdatePaymentMethodCommand : IRequest<UpdatePaymentMethodResponse>, ISecuredRequest
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
+        public string[] RequiredRoles => ["Admin"];
         public class UpdatePaymentMethodCommandHandler : IRequestHandler<UpdatePaymentMethodCommand, UpdatePaymentMethodResponse>
         {
             private readonly IPaymentMethodRepository _paymentMethodRepository;

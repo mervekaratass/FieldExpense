@@ -29,10 +29,20 @@ namespace Application.Features.ExpenseRequests.Commands.Delete
             {
                 ExpenseRequest? expenseRequest = await _expenseRequestRepository.GetAsync(er => er.Id == request.Id,
                                                                                             include:p=>p.Include(p=>p.User).
-                                                                                            Include(p=>p.ExpenseCategory).Include(p=>p.PaymentMethod));
+                                                                                            Include(p=>p.ExpenseCategory).
+                                                                                            Include(p=>p.PaymentMethod).
+                                                                                            Include(x=>x.BankTransaction));
 
                 if (expenseRequest is null)
                     throw new BusinessException("Silinmek istenen masraf bulunamadı.");
+
+                bool hasBankTransaction =
+                 expenseRequest.BankTransaction != null &&
+                 expenseRequest.BankTransaction.DeletedDate == null;
+
+                if (hasBankTransaction)
+                    throw new BusinessException("Bu masraf talebine ait kayıtlı bir banka işlemi bulunduğundan dolayı silinemez. Lütfen önce ilgili banka işlemini kaldırın veya iptal edin.");
+
 
                 await _expenseRequestRepository.DeleteAsync(expenseRequest);
 

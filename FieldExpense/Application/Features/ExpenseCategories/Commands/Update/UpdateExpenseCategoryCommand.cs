@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
@@ -7,11 +8,11 @@ using MediatR;
 
 namespace Application.Features.ExpenseCategories.Commands.Update
 {
-    public class UpdateExpenseCategoryCommand : IRequest<UpdateExpenseCategoryResponse>
+    public class UpdateExpenseCategoryCommand : IRequest<UpdateExpenseCategoryResponse>,ISecuredRequest
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
+        public string[] RequiredRoles => ["Admin"];
         public class UpdateExpenseCategoryCommandHandler : IRequestHandler<UpdateExpenseCategoryCommand, UpdateExpenseCategoryResponse>
         {
             private readonly IExpenseCategoryRepository _expenseCategoryRepository;

@@ -14,9 +14,7 @@ namespace Application.Features.BankTransactions.Commands.Create
                     .GreaterThan(0)
                     .WithMessage("Tutar 0'dan büyük olmalıdır.");
 
-                RuleFor(x => x.BankReferenceCode)
-                    .NotEmpty().WithMessage("Banka referans kodu boş olamaz.")
-                    .MaximumLength(100).WithMessage("Banka referans kodu en fazla 100 karakter olabilir.");
+               
             }
     }
 }

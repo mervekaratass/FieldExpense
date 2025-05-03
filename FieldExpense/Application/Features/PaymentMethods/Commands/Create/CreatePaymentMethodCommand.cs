@@ -1,15 +1,16 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.PaymentMethods.Commands.Create
 {
-    public class CreatePaymentMethodCommand : IRequest<CreatePaymentMethodResponse>
+    public class CreatePaymentMethodCommand : IRequest<CreatePaymentMethodResponse>,ISecuredRequest
     {
         public string Name { get; set; }
-
+        public string[] RequiredRoles => ["Admin"];
         public class CreatePaymentMethodCommandHandler : IRequestHandler<CreatePaymentMethodCommand, CreatePaymentMethodResponse>
         {
             private readonly IPaymentMethodRepository _paymentMethodRepository;

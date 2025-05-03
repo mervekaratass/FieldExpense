@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
@@ -7,9 +8,10 @@ using MediatR;
 
 namespace Application.Features.Roles.Queries.GetById
 {
-    public class GetByIdRoleQuery : IRequest<GetByIdRoleResponse>
+    public class GetByIdRoleQuery : IRequest<GetByIdRoleResponse>,ISecuredRequest
     {
         public int Id { get; set; }
+        public string[] RequiredRoles => ["Admin"];
 
         public class GetByIdRoleQueryHandler : IRequestHandler<GetByIdRoleQuery, GetByIdRoleResponse>
         {

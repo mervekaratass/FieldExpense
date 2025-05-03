@@ -4,6 +4,7 @@ using Application.Services.ExpenseCategoryService;
 using Application.Services.PaymentMethodService;
 using Application.Services.User;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using Domain.Enums;
@@ -11,7 +12,7 @@ using MediatR;
 
 namespace Application.Features.ExpenseRequests.Commands.Create
 {
-    public class CreateExpenseRequestCommand : IRequest<CreateExpenseRequestResponse>
+    public class CreateExpenseRequestCommand : IRequest<CreateExpenseRequestResponse>,ISecuredRequest
     {
         public int UserId { get; set; }
         public int ExpenseCategoryId { get; set; }
@@ -20,7 +21,7 @@ namespace Application.Features.ExpenseRequests.Commands.Create
         public string Location { get; set; }
         public string? DocumentPath { get; set; }
         public string? Description { get; set; }
-
+        public string[] RequiredRoles => ["Admin"];
         public class CreateExpenseRequestCommandHandler : IRequestHandler<CreateExpenseRequestCommand, CreateExpenseRequestResponse>
         {
             private readonly IExpenseRequestRepository _expenseRequestRepository;
@@ -56,7 +57,7 @@ namespace Application.Features.ExpenseRequests.Commands.Create
           
 
                 ExpenseRequest expenseRequest = _mapper.Map<ExpenseRequest>(request);
-                expenseRequest.Status = ExpenseStatus.Pending; // Yeni eklenen masraflar direkt Pending olacak
+                expenseRequest.Status = ExpenseStatus.Bekliyor; // Yeni eklenen masraflar direkt Pending olacak
                 expenseRequest.IsPaid = false; // İlk başta ödeme yapılmadı
 
                 await _expenseRequestRepository.AddAsync(expenseRequest);
