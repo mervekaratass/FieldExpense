@@ -2,10 +2,9 @@
 using Application.Repositories;
 using Application.Services.ExpenseCategoryService;
 using Application.Services.PaymentMethodService;
-using Application.Services.User;
+using Application.Services.UserService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
-using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using Domain.Enums;
 using MediatR;

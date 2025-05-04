@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services.User
+namespace Application.Services.UserService
 {
     public interface IUserService
     {

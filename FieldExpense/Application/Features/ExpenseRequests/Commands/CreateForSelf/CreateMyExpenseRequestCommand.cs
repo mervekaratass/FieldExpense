@@ -2,19 +2,15 @@
 using Application.Repositories;
 using Application.Services.ExpenseCategoryService;
 using Application.Services.PaymentMethodService;
-using Application.Services.User;
+using Application.Services.UserService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Application.Features.ExpenseRequests.Commands.CreateForSelf
 {

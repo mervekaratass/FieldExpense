@@ -3,9 +3,8 @@ using AutoMapper;
 using Core.Utilities.Hashing;
 using MediatR;
 using Domain.Entities;
-using Core.CrossCuttingConcerns.Exceptions.Types;
 using Application.Services.RoleService;
-using Application.Services.User;
+using Application.Services.UserService;
 
 namespace Application.Features.User.Commands.Create
 {

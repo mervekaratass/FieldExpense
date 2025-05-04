@@ -4,7 +4,7 @@ using Application.Services.ExpenseCategoryService;
 using Application.Services.ExpenseRequetService;
 using Application.Services.PaymentMethodService;
 using Application.Services.RoleService;
-using Application.Services.User;
+using Application.Services.UserService;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;

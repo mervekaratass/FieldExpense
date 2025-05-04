@@ -1,6 +1,6 @@
 ﻿using Application.Repositories;
 using Application.Services.RoleService;
-using Application.Services.User;
+using Application.Services.UserService;
 using AutoMapper;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Utilities.Hashing;

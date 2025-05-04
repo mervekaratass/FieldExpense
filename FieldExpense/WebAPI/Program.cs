@@ -4,8 +4,10 @@ using Core;
 using Application;
 using Core.Utilities.JWT;
 using Core.Utilities.Encryption;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
+using Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,7 +22,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddCoreServices(tokenOptions);
 builder.Services.AddApplicationServices();
-
+builder.Services.AddInfrastructureServices();
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
