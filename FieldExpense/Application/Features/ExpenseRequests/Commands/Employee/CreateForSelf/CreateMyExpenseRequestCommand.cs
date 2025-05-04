@@ -1,6 +1,7 @@
 ﻿using Application.Features.ExpenseRequests.Commands.Common.Create;
 using Application.Repositories;
 using Application.Services.ExpenseCategoryService;
+using Application.Services.FileService;
 using Application.Services.PaymentMethodService;
 using Application.Services.UserService;
 using AutoMapper;
@@ -20,7 +21,7 @@ namespace Application.Features.ExpenseRequests.Commands.Employee.CreateForSelf
         public int PaymentMethodId { get; set; }
         public decimal Amount { get; set; }
         public string Location { get; set; }
-        public string? DocumentPath { get; set; }
+        public IFormFile? DocumentFile { get; set; }
         public string? Description { get; set; }
         public string[] RequiredRoles => ["Personel"];
         public class CreateMyExpenseRequestCommandHandler : IRequestHandler<CreateMyExpenseRequestCommand, CreateExpenseRequestResponse>
@@ -31,9 +32,10 @@ namespace Application.Features.ExpenseRequests.Commands.Employee.CreateForSelf
             private readonly IPaymentMethodService _paymentMethodService;
             private readonly IMapper _mapper;
             private readonly IHttpContextAccessor _httpContextAccessor;
+            private readonly IFileService _fileService;
 
             public CreateMyExpenseRequestCommandHandler(IExpenseRequestRepository expenseRequestRepository,
-                IUserService userService, IExpenseCategoryService expenseCategoryService,
+                IUserService userService, IExpenseCategoryService expenseCategoryService,IFileService fileService,
                 IPaymentMethodService paymentMethodService, IMapper mapper, IHttpContextAccessor httpContextAccessor)
             {
                 _expenseRequestRepository = expenseRequestRepository;
@@ -42,6 +44,7 @@ namespace Application.Features.ExpenseRequests.Commands.Employee.CreateForSelf
                 _paymentMethodService = paymentMethodService;
                 _mapper = mapper;
                 _httpContextAccessor = httpContextAccessor;
+                _fileService = fileService;
             }
 
             public async Task<CreateExpenseRequestResponse> Handle(CreateMyExpenseRequestCommand request, CancellationToken cancellationToken)
@@ -57,6 +60,12 @@ namespace Application.Features.ExpenseRequests.Commands.Employee.CreateForSelf
                 expenseRequest.Status = ExpenseStatus.Bekliyor;
                 expenseRequest.IsPaid = false;
 
+                // Dosya yükleniyor
+                if (request.DocumentFile != null)
+                {
+                    string filePath = await _fileService.UploadAsync(request.DocumentFile, "uploads/expenses");
+                    expenseRequest.DocumentPath = filePath;
+                }
 
                 await _expenseRequestRepository.AddAsync(expenseRequest);
 

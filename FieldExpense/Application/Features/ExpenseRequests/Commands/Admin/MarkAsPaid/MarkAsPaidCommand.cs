@@ -1,5 +1,7 @@
-﻿using Application.Repositories;
+﻿using Application.Features.Auth.Commands.UpdatePassword;
+using Application.Repositories;
 using Application.Services.BankTransactionService;
+using Application.Services.PaymentGatewayService;
 using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
@@ -18,16 +20,16 @@ namespace Application.Features.ExpenseRequests.Commands.Admin.MarkAsPaid
         public class MarkAsPaidCommandHandler : IRequestHandler<MarkAsPaidCommand, MarkAsPaidResponse>
         {
             private readonly IExpenseRequestRepository _expenseRequestRepository;
-            private readonly IBankTransactionService _bankTransactionService;
+            private readonly IPaymentGatewayService _paymentGatewayService;
             private readonly IMapper _mapper;
 
             public MarkAsPaidCommandHandler(
                 IExpenseRequestRepository expenseRequestRepository,
-                IBankTransactionService bankTransactionService,
+                IPaymentGatewayService paymentGatewayService,
                 IMapper mapper)
             {
                 _expenseRequestRepository = expenseRequestRepository;
-                _bankTransactionService = bankTransactionService;
+                _paymentGatewayService = paymentGatewayService;
                 _mapper = mapper;
             }
 
@@ -44,7 +46,7 @@ namespace Application.Features.ExpenseRequests.Commands.Admin.MarkAsPaid
                 if (expenseRequest.IsPaid)
                     throw new BusinessException("Bu talep zaten ödenmiş.");
 
-                var transaction = await _bankTransactionService.CreateTransactionAsync(new()
+                var transaction = await _paymentGatewayService.CreateTransactionAsync(new()
                 {
                     ExpenseRequestId = expenseRequest.Id,
                     Amount = expenseRequest.Amount
@@ -54,6 +56,7 @@ namespace Application.Features.ExpenseRequests.Commands.Admin.MarkAsPaid
                 await _expenseRequestRepository.UpdateAsync(expenseRequest);
 
                 var response = _mapper.Map<MarkAsPaidResponse>(transaction);
+                response.Message = "Ödeme işlemi gerçekleştirildi";
                 return response;
             }
         }

@@ -5,11 +5,11 @@ using FluentValidation;
 namespace Application.Features.ExpenseRequests.Commands.Employee.CreateForSelf
 {
 
-    public class CreateMyExpenseRequestValidator : AbstractValidator<ExpenseRequest>
+    public class CreateMyExpenseRequestValidator : AbstractValidator<CreateMyExpenseRequestCommand>
     {
         public CreateMyExpenseRequestValidator()
         {
-            RuleFor(x => x.UserId).NotEmpty().WithMessage("Kullanıcı seçilmelidir.");
+            
             RuleFor(x => x.ExpenseCategoryId).NotEmpty().WithMessage("Masraf kategorisi seçilmelidir.");
             RuleFor(x => x.PaymentMethodId).NotEmpty().WithMessage("Ödeme yöntemi seçilmelidir.");
             RuleFor(x => x.Amount)

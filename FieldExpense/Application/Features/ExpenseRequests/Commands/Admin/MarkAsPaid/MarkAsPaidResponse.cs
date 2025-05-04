@@ -14,5 +14,7 @@ namespace Application.Features.ExpenseRequests.Commands.Admin.MarkAsPaid
         public string TransactionStatus { get; set; }
         public DateTime TransactionDate { get; set; }
         public string BankReferenceCode { get; set; }
+
+       public string Message { get; set; }
     }
 }

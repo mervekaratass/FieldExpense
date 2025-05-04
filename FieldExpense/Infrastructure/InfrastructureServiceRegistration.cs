@@ -1,12 +1,10 @@
-﻿using Application.Services.ReportService;
+﻿using Application.Services.PaymentGatewayService;
+using Application.Services.ReportService;
 using Infrastructure.Contexts;
+using Infrastructure.Services.PaymentGateway;
 using Infrastructure.Services.Report;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Infrastructure
 {
@@ -17,6 +15,7 @@ namespace Infrastructure
         {
             services.AddScoped<DapperContext>();
             services.AddScoped<IReportService, ReportManager>();
+            services.AddScoped<IPaymentGatewayService,PaymentGatewayManager>();
             return services;
         }
     }

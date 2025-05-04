@@ -4,10 +4,11 @@ using Core;
 using Application;
 using Core.Utilities.JWT;
 using Core.Utilities.Encryption;
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Infrastructure;
+using Application.Services.FileService;
+using Infrastructure.Services.File;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -23,6 +24,12 @@ builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddCoreServices(tokenOptions);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
+builder.Services.AddScoped<IFileService>(provider =>
+{
+    var env = provider.GetRequiredService<IWebHostEnvironment>();
+    return new FileManager(env.WebRootPath); // string parametreyi burada veriyoruz
+});
+
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -87,6 +94,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseStaticFiles(); // wwwroot eriþimi için 
+
 app.ConfigureExceptionMiddlewareExtensions();
 
 app.UseHttpsRedirection();

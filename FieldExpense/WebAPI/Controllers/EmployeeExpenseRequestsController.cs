@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("create-my")]
-        public async Task<IActionResult> CreateMyExpenseRequest([FromBody] CreateMyExpenseRequestCommand command)
+        public async Task<IActionResult> CreateMyExpenseRequest([FromForm] CreateMyExpenseRequestCommand command)
         {
             var result = await _mediator.Send(command);
             return Created("", result);

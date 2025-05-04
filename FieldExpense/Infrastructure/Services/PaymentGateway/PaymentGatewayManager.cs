@@ -1,16 +1,16 @@
-﻿
-
-using Application.Repositories;
+﻿using Application.Repositories;
+using Application.Services.BankTransactionService;
+using Application.Services.PaymentGatewayService;
 using Domain.Entities;
 using Domain.Enums;
 
-namespace Application.Services.BankTransactionService
+namespace Infrastructure.Services.PaymentGateway
 {
-    public class BankTransactionManager:IBankTransactionService
+    public class PaymentGatewayManager : IPaymentGatewayService
     {
         private readonly IBankTransactionRepository _bankTransactionRepository;
 
-        public BankTransactionManager(IBankTransactionRepository bankTransactionRepository)
+        public PaymentGatewayManager(IBankTransactionRepository bankTransactionRepository)
         {
             _bankTransactionRepository = bankTransactionRepository;
         }

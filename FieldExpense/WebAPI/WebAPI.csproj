@@ -27,6 +27,11 @@
 	  <ProjectReference Include="..\Persistence\Persistence.csproj" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\uploads\expenses\" />
+	</ItemGroup>
+
  
 
 </Project>

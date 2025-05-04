@@ -2,6 +2,7 @@
 using Application.Services.BankTransactionService;
 using Application.Services.ExpenseCategoryService;
 using Application.Services.ExpenseRequetService;
+using Application.Services.FileService;
 using Application.Services.PaymentMethodService;
 using Application.Services.RoleService;
 using Application.Services.UserService;
@@ -31,6 +32,7 @@ namespace Application
             services.AddScoped<IPaymentMethodService, PaymentMethodManager>();
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IRoleService, RoleManager>();
+           
 
 
 
