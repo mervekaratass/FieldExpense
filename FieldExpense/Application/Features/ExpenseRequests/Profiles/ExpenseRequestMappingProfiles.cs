@@ -1,14 +1,14 @@
-﻿using Application.Features.ExpenseRequests.Commands.Create;
-using  Application.Features.ExpenseRequests.Commands.CreateForSelf;
+﻿using Application.Features.ExpenseRequests.Commands.Admin.MarkAsPaid;
+using Application.Features.ExpenseRequests.Commands.Common.Create;
+using Application.Features.ExpenseRequests.Commands.Common.Delete;
+using Application.Features.ExpenseRequests.Commands.Common.Update;
 using Application.Features.ExpenseRequests.Commands.Decision.Approve.Application.Features.ExpenseRequests.Commands.Approve;
 using Application.Features.ExpenseRequests.Commands.Decision.Reject.Application.Features.ExpenseRequests.Commands.Reject;
-using Application.Features.ExpenseRequests.Commands.Delete;
-using Application.Features.ExpenseRequests.Commands.MarkAsPaid;
-using Application.Features.ExpenseRequests.Commands.Update;
-using Application.Features.ExpenseRequests.Queries.GetById;
-using Application.Features.ExpenseRequests.Queries.GetFiltered;
-using Application.Features.ExpenseRequests.Queries.GetList;
-using Application.Features.ExpenseRequests.Queries.GetMyList;
+using Application.Features.ExpenseRequests.Commands.Employee.CreateForSelf;
+using Application.Features.ExpenseRequests.Queries.Common.GetById;
+using Application.Features.ExpenseRequests.Queries.Common.GetList;
+using Application.Features.ExpenseRequests.Queries.Employee.GetFiltered;
+using Application.Features.ExpenseRequests.Queries.Employee.GetMyList;
 using AutoMapper;
 using Domain.Entities;
 

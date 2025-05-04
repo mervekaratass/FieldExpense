@@ -1,4 +1,5 @@
 ﻿using Application.Services.ReportService;
+using Infrastructure.Contexts;
 using Infrastructure.Services.Report;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,6 +15,7 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
+            services.AddScoped<DapperContext>();
             services.AddScoped<IReportService, ReportManager>();
             return services;
         }

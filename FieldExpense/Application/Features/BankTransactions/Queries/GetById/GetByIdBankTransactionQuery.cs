@@ -1,6 +1,7 @@
 ﻿
 using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
@@ -8,10 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.BankTransactions.Queries.GetById
 {
-    public class GetByIdBankTransactionQuery : IRequest<GetByIdBankTransactionResponse>
+    public class GetByIdBankTransactionQuery : IRequest<GetByIdBankTransactionResponse>,ISecuredRequest
     {
         public int Id { get; set; }
-
+        public string[] RequiredRoles => ["Admin"];
         public class GetByIdBankTransactionQueryHandler : IRequestHandler<GetByIdBankTransactionQuery, GetByIdBankTransactionResponse>
         {
             private readonly IBankTransactionRepository _bankTransactionRepository;

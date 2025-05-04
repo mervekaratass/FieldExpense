@@ -1,7 +1,6 @@
-﻿using Application.Features.ExpenseRequests.Commands.Delete;
-using Application.Repositories;
-using Application.Services.BankTransactionService;
+﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using MediatR;
@@ -9,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.BankTransactions.Commands.Delete
 {
-    public class DeleteBankTransactionCommand : IRequest<DeleteBankTransactionResponse>
+    public class DeleteBankTransactionCommand : IRequest<DeleteBankTransactionResponse>,ISecuredRequest
     {
         public int Id { get; set; }
-
+        public string[] RequiredRoles => ["Admin"];
         public class DeleteBankTransactionCommandHandler : IRequestHandler<DeleteBankTransactionCommand, DeleteBankTransactionResponse>
         {
             private readonly IBankTransactionRepository _bankTransactionRepository;

@@ -1,13 +1,15 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.User.Queries.GetList
 {
-    public class GetListUserQuery : IRequest<List<GetListUserResponse>>
+    public class GetListUserQuery : IRequest<List<GetListUserResponse>>,ISecuredRequest
     {
+        public string[] RequiredRoles => ["Admin"];
         public class GetListUserQueryHandler : IRequestHandler<GetListUserQuery, List<GetListUserResponse>>
         {
             private readonly IUserRepository _userRepository;

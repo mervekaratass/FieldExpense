@@ -5,10 +5,11 @@ using MediatR;
 using Domain.Entities;
 using Application.Services.RoleService;
 using Application.Services.UserService;
+using Core.Application.Pipelines.Authorization;
 
 namespace Application.Features.User.Commands.Create
 {
-    public class CreateUserCommand : IRequest<CreateUserResponse>
+    public class CreateUserCommand : IRequest<CreateUserResponse>,ISecuredRequest
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -17,6 +18,7 @@ namespace Application.Features.User.Commands.Create
         public string IBAN { get; set; }
         public int RoleId { get; set; }
         public string Password { get; set; }
+        public string[] RequiredRoles => ["Admin","Personel"];
 
 
         public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, CreateUserResponse>

@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
 using Domain.Enums;
@@ -7,11 +8,12 @@ using MediatR;
 
 namespace Application.Features.BankTransactions.Commands.Create
 {
-    public class CreateBankTransactionCommand : IRequest<CreateBankTransactionResponse>
+    public class CreateBankTransactionCommand : IRequest<CreateBankTransactionResponse>,ISecuredRequest
     {
         public int ExpenseRequestId { get; set; }
         public decimal Amount { get; set; }
 
+        public string[] RequiredRoles => ["Admin"];
 
         public class CreateBankTransactionCommandHandler : IRequestHandler<CreateBankTransactionCommand, CreateBankTransactionResponse>
         {

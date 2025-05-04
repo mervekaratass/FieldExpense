@@ -2,6 +2,7 @@
 using Application.Services.RoleService;
 using Application.Services.UserService;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.Utilities.Hashing;
 using Domain.Entities;
@@ -10,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.User.Commands.Update
 {
-    public class UpdateUserCommand : IRequest<UpdateUserResponse>
+    public class UpdateUserCommand : IRequest<UpdateUserResponse>,ISecuredRequest
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -21,6 +22,7 @@ namespace Application.Features.User.Commands.Update
         public string Password { get; set; }
         public int RoleId { get; set; }
 
+        public string[] RequiredRoles => ["Admin"];
         public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, UpdateUserResponse>
         {
             private readonly IUserRepository _userRepository;

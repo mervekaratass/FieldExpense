@@ -1,15 +1,17 @@
 ﻿using Application.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.User.Commands.Delete
 {
-    public class DeleteUserCommand : IRequest<DeleteUserResponse>
+    public class DeleteUserCommand : IRequest<DeleteUserResponse>,ISecuredRequest
     {
         public int Id { get; set; }
 
+        public string[] RequiredRoles => ["Admin"];
         public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, DeleteUserResponse>
         {
             private readonly IUserRepository _userRepository;

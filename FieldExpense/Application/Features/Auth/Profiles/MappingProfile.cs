@@ -1,6 +1,5 @@
-﻿using Application.Features.Auth.Commands.Register;
+﻿
 using AutoMapper;
-
 
 namespace Application.Features.Auth.Profiles
 {
@@ -8,7 +7,7 @@ namespace Application.Features.Auth.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<Domain.Entities.User, RegisterCommand>().ReverseMap();
+           
         }
     }
 }

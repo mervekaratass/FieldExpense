@@ -1,6 +1,7 @@
 ﻿using Application.Features.Auth.Commands.Login;
-using Application.Features.Auth.Commands.Register;
+using Application.Features.Auth.Commands.UpdatePassword;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -16,18 +17,20 @@ namespace WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] RegisterCommand registerCommand)
-        {
-            await _mediator.Send(registerCommand);
-            return Created();
-        }
-
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginCommand loginCommand)
         {
             var response = await _mediator.Send(loginCommand);
             return Ok(response);
         }
+
+        [HttpPut("update-password")]
+     
+        public async Task<IActionResult> UpdatePassword(UpdatePasswordCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
     }
 }
