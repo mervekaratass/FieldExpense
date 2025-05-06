@@ -2,6 +2,7 @@
 <p> 📌Bu proje Patika.dev ile gerçekleştirilen Papara Kadın Yazılımcı Bootcamp eğitiminin final case ödevi için geliştirdiğim projedir. </p>
 <p> 📌 Projenin çalışır halinin ekran görüntülerine ait dosyasına <a href="https://drive.google.com/file/d/1Q7mqndQn31VuwIUrZkpJCXzhyQg1p4Sj/view"> buradan </a> ulaşabilirsiniz. </p>
 
+Projedeki veritabanını çalıştırıp denemek isteyenler için kullanıcıların şifreleri Admin123! olarak belirlenmiştir.
 
 #### GEREKSİNİMLER 🛠
 - ✅ Web projesi: 
@@ -67,6 +68,7 @@ Proje, .Net 8, ile geliştirilen modern bir web uygulamasıdır. Projemizde MsSQ
 Projede, **Onion mimarisi**, **Mediatr** ve **CQRS (Command Query Responsibility Segregation)** pattern'leri kullanılarak daha modüler ve yönetilebilir bir yapı sağlanmıştır. Veritabanı işlemleri için **Entity Framework** kullanılmış ve **Code First** yaklaşımı benimsenmiştir.
 Projede silme işlemleri **Soft Delete (yumuşak silme)** mantığıyla gerçekleştirilmiştir. Yani, bir veri silindiğinde fiziksel olarak veritabanından tamamen kaldırılmak yerine, ilgili kaydın DeletedDate alanı doldurularak silinmiş gibi işaretlenir. 
 Bu sayede; Veriler sistemsel olarak silinmiş gibi işlenirken,Raporlama, geçmiş inceleme veya loglama gibi işlemler için kayıtlar erişilebilir kalır. Veri kaybı önlenmiş olur.
+📌 Projede en başta 2 admin seed data olarak tasarlanıp  veri tabanı oluşturulur. Bu adminlerin şifresi başlangıçta Admin123! oalrak belirlenmiştir.
 
 🧰 Ek olarak, projede şu önemli kütüphaneler ve araçlar kullanılmaktadır:
 - **AutoMapper**: Nesneler arası dönüşümleri kolaylaştırmak için.
@@ -226,6 +228,7 @@ Oluşturulan Entityler
 </p>
 <p></br>🖋 Code First yaklaşımı ile kullanılan veri tabanı modellerini(entity) ve ilişkilerinin yapılandırılmasını sağlamak için bir yol olan Fluent Api ile modellerin konfigürasyonlarını gerçekleştirilmiştir. Örnek olarak yukarıda verilen ExpenseCategory sınıfın konfigürasyon kodları gösterilmiştir. </p>
 
+
 </br>
 
 ```c#
@@ -245,6 +248,7 @@ Oluşturulan Entityler
       }
   }
 ```
+📌 User EntityConfigurations data 2 adet admin seed data olarak otomatik yüklenir ve şifreleri Admin123! olarak en başta oluşturulur.
 
 <p>📁 Repositories----> Her entity sınıfının veri tabanı işlemlerini gerçekleştirmek için oluşturulan repository sınıfları bulunmaktadır. Bu projede Generic Repository yaklaşımı kullanılmaktadır. Ortak veri erişim işlemleri (Add, Update, Delete, GetById, vs.) Core katmanında bulunan EfRepositoryBase adlı sınıfta tanımlanmıştır.
   Her entity için sadece kendi özel ihtiyaçları varsa override edilebilecek şekilde, bu base sınıftan türetilmiş repository sınıfları yer alır.Örnek olarak yukarıda verilen ExpenseCategory sınıfının repository sınfına ait kodları gösterilmiştir.
