@@ -1,19 +1,19 @@
 # Saha Masraf Yönetimi📝
 <p> 📌Bu proje Patika.dev ile gerçekleştirilen Papara Kadın Yazılımcı Bootcamp eğitiminin final case ödevi için geliştirdiğim projedir. </p>
-
+<p> 📌 Projenin çalışır halinin ekran görüntülerine ait dosyasına <a href="https://drive.google.com/file/d/1Q7mqndQn31VuwIUrZkpJCXzhyQg1p4Sj/view"> buradan </a> ulaşabilirsiniz. </p>
 
 
 #### GEREKSİNİMLER 🛠
-- [x] Web projesi: 
+- ✅ Web projesi: 
   ![Asp.NET Web API](https://img.shields.io/badge/asp.net%20web%20api-%231BA3E8.svg?style=for-the-badge&logo=dotnet&logoColor=white)
-- [x] Veri tabanı: 
+- ✅ Veri tabanı: 
   ![MsSQL Server](https://img.shields.io/badge/mssql%20server-%23CC2927.svg?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
-- [x] Dökümantasyon için:
+- ✅ Dökümantasyon için:
   ![Postman](https://img.shields.io/badge/postman-%23FF6C37.svg?style=for-the-badge&logo=postman&logoColor=white)
   ![Swagger](https://img.shields.io/badge/swagger-%2385EA2D.svg?style=for-the-badge&logo=swagger&logoColor=black)
-- [x] Mimari: 
+- ✅ Mimari: 
   ![Onion Mimarisi](https://img.shields.io/badge/onion%20mimarisi-%237D7D7D.svg?style=for-the-badge&logo=generic&logoColor=white)
-- [x] Kullanılan Pattern'ler:
+- ✅ Kullanılan Pattern'ler:
   ![MediatR](https://img.shields.io/badge/mediatr-%238B008B.svg?style=for-the-badge&logo=generic&logoColor=white)
   ![CQRS](https://img.shields.io/badge/cqrs-%23121011.svg?style=for-the-badge&logo=generic&logoColor=white)
 
@@ -565,7 +565,6 @@ return _tokenHelper.CreateToken(user, userRoles);
 
 -----------------------------------------------------------------------
 <p> 📌 Projenin çalışır halinin ekran görüntülerine ait dosyasına <a href="https://drive.google.com/file/d/1Q7mqndQn31VuwIUrZkpJCXzhyQg1p4Sj/view"> buradan </a> ulaşabilirsiniz. </p>
-<p> 📌 Projenin veri tabanı backup dosyasına <a href=""> buradan </a> ulaşabilirsiniz. </p>
 
 -----------------------------------------------------------------------
 
