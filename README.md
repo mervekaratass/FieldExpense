@@ -564,7 +564,7 @@ return _tokenHelper.CreateToken(user, userRoles);
 ```
 
 -----------------------------------------------------------------------
-
+<p> 📌 Projenin çalışır halinin ekran görüntülerine ait dosyasına <a href="https://drive.google.com/file/d/1Q7mqndQn31VuwIUrZkpJCXzhyQg1p4Sj/view"> buradan </a> ulaşabilirsiniz. </p>
 <p> 📌 Projenin veri tabanı backup dosyasına <a href=""> buradan </a> ulaşabilirsiniz. </p>
 
 -----------------------------------------------------------------------
